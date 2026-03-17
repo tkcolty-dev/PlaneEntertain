@@ -172,7 +172,9 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 /* ── CHESS ── */
 .chess-wrap{display:flex;flex-direction:column;align-items:center;padding:12px 8px;flex:1;overflow:auto}
 .chess-board{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);max-width:min(380px,calc(100vw - 32px));width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden;border:3px solid rgba(139,92,246,.3);box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.chess-sq{display:flex;align-items:center;justify-content:center;font-size:clamp(22px,5.8vw,38px);cursor:pointer;position:relative;transition:background .12s;user-select:none;line-height:1;overflow:hidden;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.chess-sq{display:flex;align-items:center;justify-content:center;font-size:clamp(22px,5.8vw,38px);cursor:pointer;position:relative;transition:background .12s;user-select:none;line-height:1;overflow:hidden}
+.chess-sq.wpc{color:#fff;text-shadow:0 0 2px rgba(0,0,0,.8),0 0 4px rgba(0,0,0,.5),1px 1px 0 rgba(0,0,0,.4),-1px -1px 0 rgba(0,0,0,.4),1px -1px 0 rgba(0,0,0,.4),-1px 1px 0 rgba(0,0,0,.4)}
+.chess-sq.bpc{color:#1a1a1a;text-shadow:0 0 1px rgba(255,255,255,.3)}
 .chess-sq.light{background:#f0d9b5}.chess-sq.dark{background:#b58863}
 .chess-sq.sel{background:#f6f669 !important}
 .chess-sq.move-dot::after{content:'';position:absolute;width:26%;height:26%;border-radius:50%;background:rgba(0,0,0,.2);box-shadow:0 0 4px rgba(0,0,0,.15)}
@@ -1571,7 +1573,7 @@ function gChess(ct){
       const[r,c]=RC(i);const sq=document.createElement('div');
       sq.className='chess-sq '+((r+c)%2===0?'light':'dark');
       if(lastMove&&lastMove.includes(i))sq.classList.add('last');
-      if(board[i]){sq.textContent=PIECES[board[i]];if(isB(board[i]))sq.style.textShadow='0 1px 2px rgba(0,0,0,.6)'}
+      if(board[i]){sq.textContent=PIECES[board[i]];sq.classList.add(isW(board[i])?'wpc':'bpc')}
       if(board[i]==='K'&&inCheck(board,true))sq.classList.add('check');
       if(board[i]==='k'&&inCheck(board,false))sq.classList.add('check');
       sq.onclick=()=>clickSq(i);
