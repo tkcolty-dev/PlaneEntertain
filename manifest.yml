@@ -1,0 +1,7 @@
+---
+applications:
+  - name: plane-entertain
+    memory: 64M
+    disk_quota: 128M
+    buildpacks:
+      - staticfile_buildpack
